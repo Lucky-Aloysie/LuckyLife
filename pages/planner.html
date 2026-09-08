@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LuckyLife • Planner</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">LuckyLife 🌿</div>
+
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="planner.html">Planner</a>
+      <a href="#">Goals</a>
+      <a href="#">Memories</a>
+      <a href="#">Journal</a>
+    </div>
+  </nav>
+
+  <header>
+    <h1>Daily Planner</h1>
+    <p>Create a beautiful schedule for your day</p>
+  </header>
+
+  <main>
+
+    <div class="card date-box">
+      <h3>📅 Today's Date</h3>
+      <input type="date" id="planner-date">
+    </div>
+
+    <div class="card">
+      <h3>✨ Add a New Task</h3>
+
+      <div class="task-form">
+        <input type="time" id="task-time">
+        <input type="text" id="task-name" placeholder="Morning prayer, work, gym...">
+        <button onclick="addTask()">Add</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🌿 Today's Schedule</h3>
+      <div id="task-list"></div>
+    </div>
+
+  </main>
+
+  <script src="../script.js"></script>
+
+  <script>
+    const dateInput = document.getElementById("planner-date");
+    const today = new Date().toISOString().split("T")[0];
+    dateInput.value = today;
+  </script>
+
+</body>
+</html>

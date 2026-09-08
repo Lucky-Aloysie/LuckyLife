@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LuckyLife • Goals</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav class="navbar">
+<div class="logo">LuckyLife 🌿</div>
+
+<div class="nav-links">
+<a href="../index.html">Home</a>
+<a href="planner.html">Planner</a>
+<a href="goals.html">Goals</a>
+<a href="memories.html">Memories</a>
+<a href="#">Journal</a>
+</div>
+</nav>
+
+<header class="hero">
+<h1>My Goals 🎯</h1>
+<p>Every dream begins with one intentional step.</p>
+</header>
+
+<main>
+
+<div class="card">
+
+<h2>Create a New Goal</h2>
+
+<input
+type="text"
+id="goalTitle"
+placeholder="Example: Save $10,000">
+
+<select id="goalCategory">
+
+<option>Financial</option>
+
+<option>Career</option>
+
+<option>Health</option>
+
+<option>Spiritual</option>
+
+<option>Personal</option>
+
+</select>
+
+<label style="margin-top:18px;display:block;">
+Current Progress (%)
+</label>
+
+<input
+type="range"
+id="goalProgress"
+min="0"
+max="100"
+value="0">
+
+<button style="margin-top:18px;" onclick="addGoal()">
+Save Goal
+</button>
+
+</div>
+
+<h2 style="margin:35px 0 10px;color:#174A32;">
+My Dream Board
+</h2>
+
+<div id="goalGrid" class="goal-grid"></div>
+
+</main>
+
+<script src="../script.js"></script>
+
+</body>
+</html>

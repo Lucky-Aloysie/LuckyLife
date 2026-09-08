@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuckyLife</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">LuckyLife 🌿</div>
+
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="pages/planner.html">Planner</a>
+      <a href="pages/goals.html">Goals</a>
+      <a href="pages/memories.html">Memories</a>
+      <a href="pages/journal.html">Journal</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+
+    <div class="hero-content">
+
+      <p class="welcome">WELCOME BACK ✨</p>
+
+      <h1>Good Morning, Lucky 🤍</h1>
+
+      <p id="todayDate"></p>
+
+    </div>
+
+  </header>
+
+  <!-- Main -->
+  <main>
+
+    <!-- Dashboard -->
+    <section class="dashboard-grid">
+
+      <div class="card progress-card">
+
+        <span class="label">TODAY'S PROGRESS</span>
+
+        <h2 id="progressNumber">0%</h2>
+
+        <p id="progressText">Start planning your day 🌿</p>
+
+        <div class="progress-bar">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+
+      </div>
+
+      <div class="card next-card">
+
+        <span class="label">NEXT TASK</span>
+
+        <h3 id="nextTask">Nothing planned</h3>
+
+        <p id="nextTime">Open your planner</p>
+
+        <a href="pages/planner.html" class="mini-btn">
+          Open Planner →
+        </a>
+
+      </div>
+
+    </section>
+
+    <!-- Verse -->
+    <section class="card verse-card">
+
+      <span class="label">VERSE OF THE DAY</span>
+
+      <h3>Proverbs 17:17</h3>
+
+      <blockquote>
+        “A friend loves at all times.”
+      </blockquote>
+
+    </section>
+
+    <!-- Features -->
+    <section>
+
+      <div class="section-title">
+        <h2>My Life</h2>
+        <p>Everything important in one beautiful place.</p>
+      </div>
+
+      <div class="feature-grid">
+
+        <a href="pages/planner.html" class="feature-card">
+          <div class="icon">📅</div>
+          <h3>Daily Planner</h3>
+          <p>Plan every hour of your day.</p>
+        </a>
+
+        <a href="pages/goals.html" class="feature-card">
+          <div class="icon">🎯</div>
+          <h3>Goals</h3>
+          <p>Track dreams and achievements.</p>
+        </a>
+
+        <a href="pages/memories.html" class="feature-card">
+          <div class="icon">📸</div>
+          <h3>Memories</h3>
+          <p>Keep the moments you'll never forget.</p>
+        </a>
+
+        <a href="pages/journal.html" class="feature-card">
+          <div class="icon">📖</div>
+          <h3>Journal</h3>
+          <p>Reflect, pray and grow every day.</p>
+        </a>
+
+      </div>
+
+    </section>
+
+    <!-- Motivation -->
+    <section class="motivation">
+
+      <div class="card">
+
+        <span class="label">LUCKYLIFE MOTTO</span>
+
+        <h2>
+          Build the life you dream of,
+          one intentional day at a time.
+        </h2>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+
+    <p>Made with 🤍 by Lucky</p>
+
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

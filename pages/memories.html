@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LuckyLife • Memories</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav class="navbar">
+<div class="logo">LuckyLife 🌿</div>
+
+<div class="nav-links">
+<a href="../index.html">Home</a>
+<a href="planner.html">Planner</a>
+<a href="#">Goals</a>
+<a href="memories.html">Memories</a>
+<a href="#">Journal</a>
+</div>
+</nav>
+
+<header class="hero">
+<h1>My Memories 🤍</h1>
+<p>Keep the moments that make your life beautiful.</p>
+</header>
+
+<main>
+
+<div class="card">
+
+<h2>Create a New Memory</h2>
+
+<input type="text" id="memoryTitle" placeholder="Memory title">
+
+<input type="date" id="memoryDate">
+
+<input type="file" id="memoryImage" accept="image/*">
+
+<textarea id="memoryStory" placeholder="Tell the story behind this beautiful moment..."></textarea>
+
+<button onclick="saveMemory()">Save Memory</button>
+
+</div>
+
+<h2 style="margin:30px 0 10px;color:#174A32;">
+My Timeline
+</h2>
+
+<div id="memoryGrid" class="memory-grid"></div>
+
+</main>
+
+<script src="../script.js"></script>
+
+</body>
+</html>
