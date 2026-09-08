@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuckyLife | Journal</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">LuckyLife 🌿</div>
+
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="planner.html">Planner</a>
+      <a href="goals.html">Goals</a>
+      <a href="memories.html">Memories</a>
+      <a href="journal.html" class="active">Journal</a>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="page-header">
+    <p class="welcome">MY PERSONAL SPACE ✨</p>
+    <h1>Daily Journal 📖</h1>
+    <p>Reflect, pray, and capture the little moments that shape your life.</p>
+  </header>
+
+  <main>
+
+    <!-- Date -->
+    <section class="card">
+      <span class="label">TODAY</span>
+      <h2 id="journalDate"></h2>
+    </section>
+
+    <!-- Gratitude -->
+    <section class="card">
+      <span class="label">GRATITUDE</span>
+      <h2>3 Things I'm Thankful For</h2>
+
+      <textarea id="gratitude1" placeholder="1."></textarea>
+      <textarea id="gratitude2" placeholder="2."></textarea>
+      <textarea id="gratitude3" placeholder="3."></textarea>
+    </section>
+
+    <!-- Reflection -->
+    <section class="card">
+      <span class="label">REFLECTION</span>
+      <h2>How was your day?</h2>
+
+      <textarea id="reflection"
+        placeholder="Write your thoughts, feelings, victories, or lessons..."></textarea>
+    </section>
+
+    <!-- Prayer -->
+    <section class="card">
+      <span class="label">PRAYER</span>
+      <h2>Prayer & Conversation with God</h2>
+
+      <textarea id="prayer"
+        placeholder="Dear Lord..."></textarea>
+    </section>
+
+    <!-- Mood -->
+    <section class="card">
+      <span class="label">TODAY'S MOOD</span>
+
+      <div class="mood-grid">
+        <button class="mood-btn" data-mood="😊">😊</button>
+        <button class="mood-btn" data-mood="😌">😌</button>
+        <button class="mood-btn" data-mood="❤️">❤️</button>
+        <button class="mood-btn" data-mood="🥹">🥹</button>
+        <button class="mood-btn" data-mood="😔">😔</button>
+      </div>
+
+      <p id="selectedMood">No mood selected</p>
+    </section>
+
+    <!-- Save -->
+    <section class="save-section">
+      <button id="saveJournal" class="main-btn">
+        Save Today's Journal 💾
+      </button>
+
+      <p id="saveMessage"></p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Every page you write becomes part of your story 🤍</p>
+  </footer>
+
+  <script src="../journal.js"></script>
+
+</body>
+</html>

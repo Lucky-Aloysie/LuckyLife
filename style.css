@@ -1006,3 +1006,67 @@ footer p {
     }
 
 }
+/* ==========================
+   JOURNAL
+========================== */
+
+.journal-section{
+  margin-top:40px;
+}
+
+.journal-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:22px;
+}
+
+.journal-card{
+  background:white;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 8px 20px rgba(0,0,0,.06);
+  border-left:5px solid #174A32;
+}
+
+.journal-date{
+  color:#174A32;
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.journal-card h3{
+  color:#174A32;
+  margin-bottom:10px;
+}
+
+.journal-mood{
+  display:inline-block;
+  background:#EEF4EF;
+  color:#174A32;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  margin-bottom:14px;
+}
+
+.journal-text{
+  white-space:pre-wrap;
+  line-height:1.6;
+  margin-bottom:15px;
+}
+
+.journal-prayer{
+  background:#F7F4EC;
+  border-radius:12px;
+  padding:14px;
+}
+
+.journal-prayer strong{
+  color:#174A32;
+}
+
+.journal-prayer p{
+  white-space:pre-wrap;
+  margin-top:8px;
+}

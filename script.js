@@ -1,133 +1,100 @@
+```javascript
 // ========================================
 // LuckyLife 🌿
-// Complete App Script
-// Dashboard + Planner + Goals + Memories
+// Complete Script
+// Home • Planner • Goals • Memories • Journal
 // ========================================
+
+document.addEventListener("DOMContentLoaded", () => {
+  updateDashboard();
+  initPlanner();
+  loadGoals();
+  initMemories();
+  initJournal();
+});
 
 
 // ========================================
-// DASHBOARD
+// HOME DASHBOARD
 // ========================================
 
 function updateDashboard() {
 
-    const dateElement = document.getElementById("todayDate");
+  const date = document.getElementById("todayDate");
 
-    if (dateElement) {
+  if (date) {
+    date.textContent = new Date().toLocaleDateString("en-US", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric"
+    });
+  }
 
-        const today = new Date();
+  const progress = document.getElementById("progressNumber");
 
-        dateElement.textContent = today.toLocaleDateString("en-US", {
-            weekday: "long",
-            month: "long",
-            day: "numeric",
-            year: "numeric"
-        });
+  if (!progress) return;
 
-    }
+  const today = new Date().toISOString().split("T")[0];
 
+  const tasks = JSON.parse(
+    localStorage.getItem("luckylife-" + today) || "[]"
+  );
 
-    const progressNumber =
-        document.getElementById("progressNumber");
+  const completed = tasks.filter(task => task.completed).length;
+  const total = tasks.length;
 
-    if (!progressNumber) {
-        return;
-    }
+  const percent =
+    total === 0 ? 0 : Math.round((completed / total) * 100);
 
+  progress.textContent = percent + "%";
 
-    const today =
-        new Date().toISOString().split("T")[0];
+  const progressText =
+    document.getElementById("progressText");
 
+  const progressFill =
+    document.getElementById("progressFill");
 
-    const saved =
-        JSON.parse(
-            localStorage.getItem("luckylife-" + today) || "[]"
-        );
+  if (progressText) {
+    progressText.textContent =
+      `${completed} of ${total} tasks completed`;
+  }
 
+  if (progressFill) {
+    progressFill.style.width = percent + "%";
+  }
 
-    const completed =
-        saved.filter(task => task.completed).length;
+  const next = tasks
+    .filter(task => !task.completed)
+    .sort((a, b) => a.time.localeCompare(b.time))[0];
 
+  const nextTask =
+    document.getElementById("nextTask");
 
-    const total =
-        saved.length;
+  const nextTime =
+    document.getElementById("nextTime");
 
-
-    const percent =
-        total === 0
-            ? 0
-            : Math.round((completed / total) * 100);
-
-
-    progressNumber.textContent =
-        percent + "%";
-
-
-    const progressText =
-        document.getElementById("progressText");
-
-    if (progressText) {
-
-        progressText.textContent =
-            `${completed} of ${total} tasks completed`;
-
-    }
-
-
-    const progressFill =
-        document.getElementById("progressFill");
-
-    if (progressFill) {
-
-        progressFill.style.width =
-            percent + "%";
-
-    }
-
-
-    const nextTask =
-        saved
-            .filter(task => !task.completed)
-            .sort((a, b) =>
-                a.time.localeCompare(b.time)
-            )[0];
-
-
-    const nextTaskElement =
-        document.getElementById("nextTask");
-
-    const nextTimeElement =
-        document.getElementById("nextTime");
-
+  if (next) {
 
     if (nextTask) {
-
-        if (nextTaskElement) {
-            nextTaskElement.textContent =
-                nextTask.name;
-        }
-
-        if (nextTimeElement) {
-            nextTimeElement.textContent =
-                nextTask.time;
-        }
-
-    } else {
-
-        if (nextTaskElement) {
-            nextTaskElement.textContent =
-                "Nothing planned 🌿";
-        }
-
-        if (nextTimeElement) {
-            nextTimeElement.textContent =
-                "Enjoy your day";
-        }
-
+      nextTask.textContent = next.name;
     }
 
-}
+    if (nextTime) {
+      nextTime.textContent = next.time;
+    }
 
+  } else {
+
+    if (nextTask) {
+      nextTask.textContent = "Nothing planned";
+    }
+
+    if (nextTime) {
+      nextTime.textContent = "Open your planner";
+    }
+  }
+}
 
 
 // ========================================
@@ -135,261 +102,187 @@ function updateDashboard() {
 // ========================================
 
 let tasks = [];
-
 let currentDate = "";
 
+function initPlanner() {
 
-const plannerDate =
+  const picker =
     document.getElementById("planner-date");
 
+  if (!picker) return;
 
-if (plannerDate) {
+  currentDate =
+    new Date().toISOString().split("T")[0];
 
-    currentDate =
-        new Date().toISOString().split("T")[0];
+  picker.value = currentDate;
 
+  loadTasks();
 
-    plannerDate.value =
-        currentDate;
+  picker.addEventListener("change", () => {
 
+    currentDate = picker.value;
 
     loadTasks();
 
-
-    plannerDate.addEventListener("change", function () {
-
-        currentDate =
-            plannerDate.value;
-
-        loadTasks();
-
-    });
-
+  });
 }
 
 
 function addTask() {
 
-    const time =
-        document.getElementById("task-time");
+  const time =
+    document.getElementById("task-time");
 
-    const name =
-        document.getElementById("task-name");
+  const name =
+    document.getElementById("task-name");
 
+  if (!time || !name) return;
 
-    if (!time || !name) {
-        return;
-    }
+  if (
+    time.value === "" ||
+    name.value.trim() === ""
+  ) {
 
+    alert("Please enter both a time and a task.");
 
-    if (
-        time.value === "" ||
-        name.value.trim() === ""
-    ) {
+    return;
+  }
 
-        alert(
-            "Please enter both a time and a task."
-        );
+  tasks.push({
+    id: Date.now(),
+    time: time.value,
+    name: name.value.trim(),
+    completed: false
+  });
 
-        return;
-    }
+  tasks.sort((a, b) =>
+    a.time.localeCompare(b.time)
+  );
 
+  saveTasks();
 
-    tasks.push({
+  time.value = "";
+  name.value = "";
 
-        id: Date.now(),
+  displayTasks();
 
-        time: time.value,
-
-        name: name.value.trim(),
-
-        completed: false
-
-    });
-
-
-    tasks.sort((a, b) =>
-        a.time.localeCompare(b.time)
-    );
-
-
-    saveTasks();
-
-
-    time.value = "";
-
-    name.value = "";
-
-
-    displayTasks();
-
-    updateDashboard();
-
+  updateDashboard();
 }
 
 
 function displayTasks() {
 
-    const list =
-        document.getElementById("task-list");
+  const list =
+    document.getElementById("task-list");
 
+  if (!list) return;
 
-    if (!list) {
-        return;
-    }
+  list.innerHTML = "";
 
+  if (tasks.length === 0) {
 
-    list.innerHTML = "";
+    list.innerHTML =
+      `<div class="empty">No tasks yet 🌿</div>`;
 
+    return;
+  }
 
-    if (tasks.length === 0) {
+  tasks.forEach(task => {
 
-        list.innerHTML = `
-            <div class="empty">
-                No tasks yet 🌿
-            </div>
-        `;
+    const div =
+      document.createElement("div");
 
-        return;
-    }
+    div.className =
+      task.completed ? "task done" : "task";
 
+    div.innerHTML = `
+      <div class="task-info">
 
-    tasks.forEach(function (task) {
+        <div class="task-time">
+          ${escapeHTML(task.time)}
+        </div>
 
-        const div =
-            document.createElement("div");
+        <div class="task-name">
+          ${escapeHTML(task.name)}
+        </div>
 
+      </div>
 
-        div.className =
-            task.completed
-                ? "task done"
-                : "task";
+      <div style="display:flex;gap:8px;">
 
+        <button onclick="toggleTask(${task.id})">
+          ${task.completed ? "↩️" : "✓"}
+        </button>
 
-        div.innerHTML = `
+        <button onclick="deleteTask(${task.id})">
+          🗑
+        </button>
 
-            <div class="task-info">
+      </div>
+    `;
 
-                <div class="task-time">
-                    ${task.time}
-                </div>
+    list.appendChild(div);
 
-                <div class="task-name">
-                    ${task.name}
-                </div>
-
-            </div>
-
-            <div style="display:flex;gap:8px;">
-
-                <button
-                    onclick="toggleTask(${task.id})">
-                    ${task.completed ? "↩️" : "✓"}
-                </button>
-
-                <button
-                    onclick="deleteTask(${task.id})">
-                    🗑
-                </button>
-
-            </div>
-
-        `;
-
-
-        list.appendChild(div);
-
-    });
-
+  });
 }
 
 
 function toggleTask(id) {
 
-    tasks =
-        tasks.map(function (task) {
+  tasks = tasks.map(task => {
 
-            if (task.id === id) {
+    if (task.id === id) {
+      task.completed = !task.completed;
+    }
 
-                task.completed =
-                    !task.completed;
+    return task;
 
-            }
+  });
 
-            return task;
+  saveTasks();
 
-        });
+  displayTasks();
 
-
-    saveTasks();
-
-    displayTasks();
-
-    updateDashboard();
-
+  updateDashboard();
 }
 
 
 function deleteTask(id) {
 
-    tasks =
-        tasks.filter(function (task) {
+  tasks =
+    tasks.filter(task => task.id !== id);
 
-            return task.id !== id;
+  saveTasks();
 
-        });
+  displayTasks();
 
-
-    saveTasks();
-
-    displayTasks();
-
-    updateDashboard();
-
+  updateDashboard();
 }
 
 
 function saveTasks() {
 
-    if (!currentDate) {
-        return;
-    }
+  if (!currentDate) return;
 
-
-    localStorage.setItem(
-
-        "luckylife-" + currentDate,
-
-        JSON.stringify(tasks)
-
-    );
-
+  localStorage.setItem(
+    "luckylife-" + currentDate,
+    JSON.stringify(tasks)
+  );
 }
 
 
 function loadTasks() {
 
-    if (!currentDate) {
-        return;
-    }
+  if (!currentDate) return;
 
+  tasks = JSON.parse(
+    localStorage.getItem(
+      "luckylife-" + currentDate
+    ) || "[]"
+  );
 
-    const saved =
-        localStorage.getItem(
-            "luckylife-" + currentDate
-        );
-
-
-    tasks =
-        saved
-            ? JSON.parse(saved)
-            : [];
-
-
-    displayTasks();
-
+  displayTasks();
 }
-
 
 
 // ========================================
@@ -398,185 +291,129 @@ function loadTasks() {
 
 function addGoal() {
 
-    const title =
-        document.getElementById("goalTitle");
+  const title =
+    document.getElementById("goalTitle");
 
-    const category =
-        document.getElementById("goalCategory");
+  const category =
+    document.getElementById("goalCategory");
 
-    const progress =
-        document.getElementById("goalProgress");
+  const progress =
+    document.getElementById("goalProgress");
 
+  if (!title || !category || !progress) return;
 
-    if (!title || !category || !progress) {
-        return;
-    }
+  if (title.value.trim() === "") {
 
+    alert("Please enter a goal.");
 
-    if (title.value.trim() === "") {
+    return;
+  }
 
-        alert("Please enter a goal.");
+  const goals = JSON.parse(
+    localStorage.getItem("luckylife-goals") || "[]"
+  );
 
-        return;
-    }
+  goals.unshift({
+    id: Date.now(),
+    title: title.value.trim(),
+    category: category.value,
+    progress: Number(progress.value)
+  });
 
+  localStorage.setItem(
+    "luckylife-goals",
+    JSON.stringify(goals)
+  );
 
-    const goals =
-        JSON.parse(
-            localStorage.getItem(
-                "luckylife-goals"
-            ) || "[]"
-        );
+  title.value = "";
 
+  progress.value = 0;
 
-    goals.unshift({
-
-        id: Date.now(),
-
-        title: title.value.trim(),
-
-        category: category.value,
-
-        progress: Number(progress.value)
-
-    });
-
-
-    localStorage.setItem(
-
-        "luckylife-goals",
-
-        JSON.stringify(goals)
-
-    );
-
-
-    title.value = "";
-
-    progress.value = 0;
-
-
-    loadGoals();
-
+  loadGoals();
 }
 
 
 function loadGoals() {
 
-    const grid =
-        document.getElementById("goalGrid");
+  const grid =
+    document.getElementById("goalGrid");
 
+  if (!grid) return;
 
-    if (!grid) {
-        return;
-    }
+  const goals = JSON.parse(
+    localStorage.getItem("luckylife-goals") || "[]"
+  );
 
+  grid.innerHTML = "";
 
-    const goals =
-        JSON.parse(
-            localStorage.getItem(
-                "luckylife-goals"
-            ) || "[]"
-        );
+  if (goals.length === 0) {
 
+    grid.innerHTML =
+      `<div class="empty">No goals yet 🌿</div>`;
 
-    grid.innerHTML = "";
+    return;
+  }
 
+  goals.forEach(goal => {
 
-    if (goals.length === 0) {
+    const card =
+      document.createElement("div");
 
-        grid.innerHTML = `
-            <div class="empty">
-                No goals yet 🌿
-            </div>
-        `;
+    card.className = "goal-card";
 
-        return;
-    }
+    card.innerHTML = `
+      <div class="goal-category">
+        ${escapeHTML(goal.category)}
+      </div>
 
+      <h3>
+        ${escapeHTML(goal.title)}
+      </h3>
 
-    goals.forEach(function (goal) {
+      <div class="goal-progress">
 
-        const card =
-            document.createElement("div");
+        <div
+          class="goal-fill"
+          style="width:${goal.progress}%">
+        </div>
 
+      </div>
 
-        card.className =
-            "goal-card";
+      <div class="goal-percent">
+        ${goal.progress}% completed
+      </div>
 
+      <button
+        class="delete-btn"
+        onclick="deleteGoal(${goal.id})">
 
-        card.innerHTML = `
+        Delete Goal
 
-            <div class="goal-category">
-                ${goal.category}
-            </div>
+      </button>
+    `;
 
-            <h3>
-                ${goal.title}
-            </h3>
+    grid.appendChild(card);
 
-            <div class="goal-progress">
-
-                <div
-                    class="goal-fill"
-                    style="width:${goal.progress}%">
-                </div>
-
-            </div>
-
-            <div class="goal-percent">
-                ${goal.progress}% completed
-            </div>
-
-            <button
-                class="delete-btn"
-                onclick="deleteGoal(${goal.id})">
-
-                Delete Goal
-
-            </button>
-
-        `;
-
-
-        grid.appendChild(card);
-
-    });
-
+  });
 }
 
 
 function deleteGoal(id) {
 
-    const goals =
-        JSON.parse(
-            localStorage.getItem(
-                "luckylife-goals"
-            ) || "[]"
-        );
+  const goals = JSON.parse(
+    localStorage.getItem("luckylife-goals") || "[]"
+  );
 
+  const updated =
+    goals.filter(goal => goal.id !== id);
 
-    const updated =
-        goals.filter(function (goal) {
+  localStorage.setItem(
+    "luckylife-goals",
+    JSON.stringify(updated)
+  );
 
-            return goal.id !== id;
-
-        });
-
-
-    localStorage.setItem(
-
-        "luckylife-goals",
-
-        JSON.stringify(updated)
-
-    );
-
-
-    loadGoals();
-
+  loadGoals();
 }
-
 
 
 // ========================================
@@ -585,253 +422,807 @@ function deleteGoal(id) {
 
 let selectedMemoryImage = "";
 
+function initMemories() {
 
-const memoryImage =
+  const input =
     document.getElementById("memoryImage");
 
+  if (!input) return;
 
-if (memoryImage) {
+  loadMemories();
 
-    loadMemories();
+  input.addEventListener("change", function () {
 
+    const file = this.files[0];
 
-    memoryImage.addEventListener(
-        "change",
-        function () {
+    if (!file) return;
 
-            const file =
-                this.files[0];
+    const reader =
+      new FileReader();
 
+    reader.onload = e => {
 
-            if (!file) {
-                return;
-            }
+      selectedMemoryImage =
+        e.target.result;
 
+    };
 
-            const reader =
-                new FileReader();
+    reader.readAsDataURL(file);
 
-
-            reader.onload =
-                function (event) {
-
-                    selectedMemoryImage =
-                        event.target.result;
-
-                };
-
-
-            reader.readAsDataURL(file);
-
-        }
-    );
-
+  });
 }
 
 
 function saveMemory() {
 
-    const title =
-        document.getElementById("memoryTitle");
+  const title =
+    document.getElementById("memoryTitle");
 
-    const date =
-        document.getElementById("memoryDate");
+  const date =
+    document.getElementById("memoryDate");
 
-    const story =
-        document.getElementById("memoryStory");
+  const story =
+    document.getElementById("memoryStory");
 
+  if (!title || !date || !story) return;
 
-    if (!title || !date || !story) {
-        return;
-    }
+  if (
+    title.value.trim() === "" ||
+    date.value === "" ||
+    story.value.trim() === "" ||
+    selectedMemoryImage === ""
+  ) {
 
-
-    if (
-        title.value.trim() === "" ||
-        date.value === "" ||
-        story.value.trim() === "" ||
-        selectedMemoryImage === ""
-    ) {
-
-        alert(
-            "Please complete all fields and choose a photo."
-        );
-
-        return;
-    }
-
-
-    const memories =
-        JSON.parse(
-            localStorage.getItem(
-                "luckylife-memories"
-            ) || "[]"
-        );
-
-
-    memories.unshift({
-
-        id: Date.now(),
-
-        title: title.value.trim(),
-
-        date: date.value,
-
-        story: story.value.trim(),
-
-        image: selectedMemoryImage
-
-    });
-
-
-    localStorage.setItem(
-
-        "luckylife-memories",
-
-        JSON.stringify(memories)
-
+    alert(
+      "Please complete all fields and choose a photo."
     );
 
+    return;
+  }
 
-    title.value = "";
+  const memories = JSON.parse(
+    localStorage.getItem(
+      "luckylife-memories"
+    ) || "[]"
+  );
 
-    date.value = "";
+  memories.unshift({
 
-    story.value = "";
+    id: Date.now(),
 
-    memoryImage.value = "";
+    title:
+      title.value.trim(),
 
-    selectedMemoryImage = "";
+    date:
+      date.value,
 
+    story:
+      story.value.trim(),
 
-    loadMemories();
+    image:
+      selectedMemoryImage
 
+  });
+
+  localStorage.setItem(
+    "luckylife-memories",
+    JSON.stringify(memories)
+  );
+
+  title.value = "";
+  date.value = "";
+  story.value = "";
+
+  const imageInput =
+    document.getElementById("memoryImage");
+
+  if (imageInput) {
+    imageInput.value = "";
+  }
+
+  selectedMemoryImage = "";
+
+  loadMemories();
 }
 
 
 function loadMemories() {
 
-    const grid =
-        document.getElementById("memoryGrid");
+  const grid =
+    document.getElementById("memoryGrid");
 
+  if (!grid) return;
 
-    if (!grid) {
-        return;
-    }
+  const memories = JSON.parse(
+    localStorage.getItem(
+      "luckylife-memories"
+    ) || "[]"
+  );
 
+  grid.innerHTML = "";
 
-    const memories =
-        JSON.parse(
-            localStorage.getItem(
-                "luckylife-memories"
-            ) || "[]"
-        );
+  if (memories.length === 0) {
 
+    grid.innerHTML =
+      `<div class="empty">
+        No memories yet 🤍
+      </div>`;
 
-    grid.innerHTML = "";
+    return;
+  }
 
+  memories.forEach(memory => {
 
-    if (memories.length === 0) {
+    const card =
+      document.createElement("div");
 
-        grid.innerHTML = `
-            <div class="empty">
-                No memories yet 🤍
-            </div>
-        `;
+    card.className =
+      "memory-card";
 
-        return;
-    }
+    card.innerHTML = `
 
+      <img
+        src="${memory.image}"
+        alt="${escapeHTML(memory.title)}">
 
-    memories.forEach(function (memory) {
+      <div class="memory-content">
 
-        const card =
-            document.createElement("div");
+        <div class="memory-date">
+          ${escapeHTML(memory.date)}
+        </div>
 
+        <h3>
+          ${escapeHTML(memory.title)}
+        </h3>
 
-        card.className =
-            "memory-card";
+        <p>
+          ${escapeHTML(memory.story)}
+        </p>
 
+        <button
+          class="delete-btn"
+          onclick="deleteMemory(${memory.id})">
 
-        card.innerHTML = `
+          Delete Memory
 
-            <img
-                src="${memory.image}"
-                alt="${memory.title}">
+        </button>
 
-            <div class="memory-content">
+      </div>
+    `;
 
-                <div class="memory-date">
-                    ${memory.date}
-                </div>
+    grid.appendChild(card);
 
-                <h3>
-                    ${memory.title}
-                </h3>
-
-                <p class="memory-story">
-                    ${memory.story}
-                </p>
-
-                <button
-                    class="delete-btn"
-                    onclick="deleteMemory(${memory.id})">
-
-                    Delete Memory
-
-                </button>
-
-            </div>
-
-        `;
-
-
-        grid.appendChild(card);
-
-    });
-
+  });
 }
 
 
 function deleteMemory(id) {
 
-    const memories =
-        JSON.parse(
-            localStorage.getItem(
-                "luckylife-memories"
-            ) || "[]"
-        );
+  const memories = JSON.parse(
+    localStorage.getItem(
+      "luckylife-memories"
+    ) || "[]"
+  );
 
-
-    const updated =
-        memories.filter(function (memory) {
-
-            return memory.id !== id;
-
-        });
-
-
-    localStorage.setItem(
-
-        "luckylife-memories",
-
-        JSON.stringify(updated)
-
+  const updated =
+    memories.filter(
+      memory => memory.id !== id
     );
 
+  localStorage.setItem(
+    "luckylife-memories",
+    JSON.stringify(updated)
+  );
 
-    loadMemories();
+  loadMemories();
+}
+
+
+// ========================================
+// JOURNAL 📖
+// ========================================
+
+let selectedMood = "";
+
+function initJournal() {
+
+  const date =
+    document.getElementById("journalDate");
+
+  // This means we are NOT on the Journal page.
+  if (!date) return;
+
+
+  // ----------------------------------------
+  // Today's date
+  // ----------------------------------------
+
+  const today =
+    new Date();
+
+  date.textContent =
+    today.toLocaleDateString("en-US", {
+
+      weekday: "long",
+
+      month: "long",
+
+      day: "numeric",
+
+      year: "numeric"
+
+    });
+
+
+  // ----------------------------------------
+  // Mood buttons
+  // ----------------------------------------
+
+  const moodButtons =
+    document.querySelectorAll(".mood-btn");
+
+  moodButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      moodButtons.forEach(btn => {
+        btn.classList.remove("selected");
+      });
+
+      button.classList.add("selected");
+
+      selectedMood =
+        button.getAttribute("data-mood");
+
+      const moodText =
+        document.getElementById("selectedMood");
+
+      if (moodText) {
+
+        moodText.textContent =
+          `Today's mood: ${selectedMood}`;
+
+      }
+
+    });
+
+  });
+
+
+  // ----------------------------------------
+  // Save button
+  // ----------------------------------------
+
+  const saveButton =
+    document.getElementById("saveJournal");
+
+  if (saveButton) {
+
+    saveButton.addEventListener(
+      "click",
+      saveJournal
+    );
+
+  }
+
+
+  // ----------------------------------------
+  // Load previous entries
+  // ----------------------------------------
+
+  loadJournal();
 
 }
 
 
+// ========================================
+// SAVE JOURNAL
+// ========================================
+
+function saveJournal() {
+
+  const gratitude1 =
+    document.getElementById("gratitude1");
+
+  const gratitude2 =
+    document.getElementById("gratitude2");
+
+  const gratitude3 =
+    document.getElementById("gratitude3");
+
+  const reflection =
+    document.getElementById("reflection");
+
+  const prayer =
+    document.getElementById("prayer");
+
+
+  if (
+    !gratitude1 ||
+    !gratitude2 ||
+    !gratitude3 ||
+    !reflection ||
+    !prayer
+  ) {
+
+    console.error(
+      "Journal fields could not be found."
+    );
+
+    return;
+  }
+
+
+  const g1 =
+    gratitude1.value.trim();
+
+  const g2 =
+    gratitude2.value.trim();
+
+  const g3 =
+    gratitude3.value.trim();
+
+  const reflectionText =
+    reflection.value.trim();
+
+  const prayerText =
+    prayer.value.trim();
+
+
+  // ----------------------------------------
+  // Validation
+  // ----------------------------------------
+
+  if (
+    g1 === "" &&
+    g2 === "" &&
+    g3 === "" &&
+    reflectionText === "" &&
+    prayerText === "" &&
+    selectedMood === ""
+  ) {
+
+    alert(
+      "Please write something in your journal before saving. 🤍"
+    );
+
+    return;
+  }
+
+
+  // ----------------------------------------
+  // Get existing entries
+  // ----------------------------------------
+
+  let entries = JSON.parse(
+    localStorage.getItem(
+      "luckylife-journal"
+    ) || "[]"
+  );
+
+
+  // ----------------------------------------
+  // Create entry
+  // ----------------------------------------
+
+  const entry = {
+
+    id: Date.now(),
+
+    date:
+      new Date().toISOString(),
+
+    gratitude: [
+      g1,
+      g2,
+      g3
+    ],
+
+    reflection:
+      reflectionText,
+
+    prayer:
+      prayerText,
+
+    mood:
+      selectedMood
+
+  };
+
+
+  // ----------------------------------------
+  // Save entry
+  // ----------------------------------------
+
+  entries.unshift(entry);
+
+  localStorage.setItem(
+    "luckylife-journal",
+    JSON.stringify(entries)
+  );
+
+
+  // ----------------------------------------
+  // Clear form
+  // ----------------------------------------
+
+  gratitude1.value = "";
+  gratitude2.value = "";
+  gratitude3.value = "";
+  reflection.value = "";
+  prayer.value = "";
+
+
+  // Clear mood
+
+  selectedMood = "";
+
+  document.querySelectorAll(".mood-btn")
+    .forEach(button => {
+      button.classList.remove("selected");
+    });
+
+
+  const moodText =
+    document.getElementById("selectedMood");
+
+  if (moodText) {
+    moodText.textContent =
+      "No mood selected";
+  }
+
+
+  // ----------------------------------------
+  // Success message
+  // ----------------------------------------
+
+  const message =
+    document.getElementById("saveMessage");
+
+  if (message) {
+
+    message.textContent =
+      "Your journal has been saved successfully 🌿";
+
+    setTimeout(() => {
+
+      message.textContent = "";
+
+    }, 3000);
+
+  }
+
+
+  // ----------------------------------------
+  // Show updated entries
+  // ----------------------------------------
+
+  loadJournal();
+
+}
+
 
 // ========================================
-// START LUCKYLIFE
+// LOAD JOURNAL
 // ========================================
 
-updateDashboard();
+function loadJournal() {
 
-loadGoals();
+  const main =
+    document.querySelector("main");
 
-loadMemories();
+  if (!main) return;
+
+
+  // Create history section if needed
+
+  let history =
+    document.getElementById("journalHistory");
+
+
+  if (!history) {
+
+    history =
+      document.createElement("section");
+
+    history.id =
+      "journalHistory";
+
+    history.className =
+      "journal-history";
+
+    main.appendChild(history);
+
+  }
+
+
+  const entries = JSON.parse(
+    localStorage.getItem(
+      "luckylife-journal"
+    ) || "[]"
+  );
+
+
+  history.innerHTML = "";
+
+
+  // ----------------------------------------
+  // No entries
+  // ----------------------------------------
+
+  if (entries.length === 0) {
+
+    history.innerHTML = `
+
+      <div class="card journal-empty">
+
+        <span class="label">
+          MY JOURNAL
+        </span>
+
+        <h2>
+          Your journal is waiting for you 🤍
+        </h2>
+
+        <p>
+          Write your first entry above and
+          it will appear here.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+
+  // ----------------------------------------
+  // History heading
+  // ----------------------------------------
+
+  const heading =
+    document.createElement("div");
+
+  heading.className =
+    "section-title";
+
+  heading.innerHTML = `
+
+    <h2>
+      Previous Entries
+    </h2>
+
+    <p>
+      Your thoughts, prayers and memories.
+    </p>
+
+  `;
+
+  history.appendChild(heading);
+
+
+  // ----------------------------------------
+  // Display entries
+  // ----------------------------------------
+
+  entries.forEach(entry => {
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "card journal-entry";
+
+
+    const entryDate =
+      new Date(entry.date);
+
+
+    const formattedDate =
+      entryDate.toLocaleDateString(
+        "en-US",
+        {
+          weekday: "long",
+          month: "long",
+          day: "numeric",
+          year: "numeric"
+        }
+      );
+
+
+    // Mood
+
+    const moodHTML =
+      entry.mood
+        ? `
+          <div class="entry-mood">
+            ${escapeHTML(entry.mood)}
+          </div>
+        `
+        : "";
+
+
+    // Gratitude
+
+    let gratitudeHTML = "";
+
+    if (
+      entry.gratitude &&
+      entry.gratitude.some(item => item)
+    ) {
+
+      const items =
+        entry.gratitude
+          .filter(item => item)
+          .map(
+            item =>
+              `<li>${escapeHTML(item)}</li>`
+          )
+          .join("");
+
+      gratitudeHTML = `
+
+        <div class="journal-entry-section">
+
+          <span class="label">
+            GRATITUDE
+          </span>
+
+          <ul>
+            ${items}
+          </ul>
+
+        </div>
+
+      `;
+    }
+
+
+    // Reflection
+
+    let reflectionHTML = "";
+
+    if (entry.reflection) {
+
+      reflectionHTML = `
+
+        <div class="journal-entry-section">
+
+          <span class="label">
+            REFLECTION
+          </span>
+
+          <p>
+            ${escapeHTML(entry.reflection)}
+          </p>
+
+        </div>
+
+      `;
+    }
+
+
+    // Prayer
+
+    let prayerHTML = "";
+
+    if (entry.prayer) {
+
+      prayerHTML = `
+
+        <div class="journal-entry-section prayer-entry">
+
+          <span class="label">
+            PRAYER 🙏
+          </span>
+
+          <p>
+            ${escapeHTML(entry.prayer)}
+          </p>
+
+        </div>
+
+      `;
+    }
+
+
+    card.innerHTML = `
+
+      <div class="journal-entry-header">
+
+        <div>
+
+          <span class="label">
+            JOURNAL ENTRY
+          </span>
+
+          <div class="journal-entry-date">
+            ${formattedDate}
+          </div>
+
+        </div>
+
+        ${moodHTML}
+
+      </div>
+
+
+      ${gratitudeHTML}
+
+      ${reflectionHTML}
+
+      ${prayerHTML}
+
+
+      <button
+        class="delete-btn"
+        onclick="deleteJournal(${entry.id})">
+
+        Delete Entry
+
+      </button>
+
+    `;
+
+
+    history.appendChild(card);
+
+  });
+
+}
+
+
+// ========================================
+// DELETE JOURNAL
+// ========================================
+
+function deleteJournal(id) {
+
+  const confirmed =
+    confirm(
+      "Are you sure you want to delete this journal entry?"
+    );
+
+  if (!confirmed) return;
+
+
+  let entries = JSON.parse(
+    localStorage.getItem(
+      "luckylife-journal"
+    ) || "[]"
+  );
+
+
+  entries =
+    entries.filter(
+      entry => entry.id !== id
+    );
+
+
+  localStorage.setItem(
+    "luckylife-journal",
+    JSON.stringify(entries)
+  );
+
+
+  loadJournal();
+
+}
+
+
+// ========================================
+// SECURITY
+// ========================================
+
+function escapeHTML(value) {
+
+  const div =
+    document.createElement("div");
+
+  div.textContent =
+    value ?? "";
+
+  return div.innerHTML;
+}
+``
