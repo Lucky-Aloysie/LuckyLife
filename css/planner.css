@@ -1,0 +1,167 @@
+/* ========================================
+   LuckyLife 🌿
+   PLANNER PAGE
+======================================== */
+
+.date-box {
+  max-width: 750px;
+  margin: 0 auto 30px;
+
+  padding: 25px;
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+  border-radius: 20px;
+
+  box-shadow: var(--shadow);
+
+  animation: pageEnter 0.7s ease both;
+}
+
+.date-box h1,
+.date-box h2 {
+  color: var(--green-dark);
+  margin-bottom: 10px;
+}
+
+.date-box p {
+  color: var(--brown-light);
+}
+
+/* ========================================
+   TASK FORM
+======================================== */
+
+.task-form {
+  max-width: 750px;
+  margin: 0 auto 30px;
+
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+
+  padding: 20px;
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+  border-radius: 18px;
+
+  box-shadow: var(--shadow);
+
+  animation: pageEnter 0.8s ease 0.1s both;
+}
+
+.task-form input {
+  flex: 1;
+  min-width: 180px;
+}
+
+.task-form button {
+  min-width: 120px;
+}
+
+/* ========================================
+   TASK
+======================================== */
+
+.task {
+  max-width: 750px;
+  margin: 12px auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding: 17px 20px;
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+  border-radius: 15px;
+
+  box-shadow: 0 6px 20px rgba(74, 56, 45, 0.05);
+
+  animation: taskSlide 0.4s ease both;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.task:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow);
+}
+
+.task-info {
+  flex: 1;
+}
+
+.task-time {
+  display: block;
+
+  color: var(--green);
+
+  font-size: 0.85rem;
+  font-weight: bold;
+
+  margin-bottom: 3px;
+}
+
+.task-name {
+  color: var(--chocolate);
+  font-weight: 600;
+}
+
+.task.done {
+  opacity: 0.65;
+  background: var(--green-light);
+}
+
+.task.done .task-name {
+  text-decoration: line-through;
+  color: var(--brown-light);
+}
+
+.task button {
+  flex-shrink: 0;
+  padding: 8px 12px;
+}
+
+/* ========================================
+   ANIMATION
+======================================== */
+
+@keyframes taskSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 600px) {
+  .task {
+    align-items: flex-start;
+  }
+
+  .task-form {
+    flex-direction: column;
+  }
+
+  .task-form input,
+  .task-form button {
+    width: 100%;
+  }
+}

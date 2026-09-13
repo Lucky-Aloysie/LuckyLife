@@ -1,59 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LuckyLife • Memories</title>
-<link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>LuckyLife • Memories</title>
+
+  <link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../css/memories.css">
+
+  <script src="../js/memories.js" defer></script>
 </head>
+
 <body>
 
-<nav class="navbar">
-<div class="logo">LuckyLife 🌿</div>
+  <!-- Navigation -->
+  <nav class="navbar">
 
-<div class="nav-links">
-<a href="../index.html">Home</a>
-<a href="planner.html">Planner</a>
-<a href="#">Goals</a>
-<a href="memories.html">Memories</a>
-<a href="#">Journal</a>
-</div>
-</nav>
+    <div class="logo">
+      LuckyLife 🌿
+    </div>
 
-<header class="hero">
-<h1>My Memories 🤍</h1>
-<p>Keep the moments that make your life beautiful.</p>
-</header>
+    <div class="nav-links">
 
-<main>
+      <a href="../index.html">
+        Home
+      </a>
 
-<div class="card">
+      <a href="planner.html">
+        Planner
+      </a>
 
-<h2>Create a New Memory</h2>
+      <a href="goals.html">
+        Goals
+      </a>
 
-<input type="text" id="memoryTitle" placeholder="Memory title">
+      <a href="memories.html" class="active">
+        Memories
+      </a>
 
-<input type="date" id="memoryDate">
+      <a href="journal.html">
+        Journal
+      </a>
 
-<input type="file" id="memoryImage" accept="image/*">
+    </div>
 
-<textarea id="memoryStory" placeholder="Tell the story behind this beautiful moment..."></textarea>
+  </nav>
 
-<button onclick="saveMemory()">
-  Save Memory 🤍
-</button>
 
-</div>
+  <!-- Hero -->
+  <section class="hero">
 
-<h2 style="margin:30px 0 10px;color:#174A32;">
-My Timeline
-</h2>
+    <h1>
+      My Memories 📸
+    </h1>
 
-<div id="memoryGrid" class="memory-grid"></div>
+    <p>
+      Save the moments that make your life special.
+    </p>
 
-</main>
+  </section>
 
-<script src="../script.js"></script>
+
+  <!-- Main Content -->
+  <main class="memories-container">
+
+
+    <!-- Add Memory -->
+    <section class="memory-form-section">
+
+      <h2>
+        Create a Memory 🤍
+      </h2>
+
+      <p class="section-intro">
+        Keep your favorite moments, stories, and photos in one special place.
+      </p>
+
+
+      <!-- Title -->
+      <div class="form-group">
+
+        <label for="memoryTitle">
+          Memory Title
+        </label>
+
+        <input
+          type="text"
+          id="memoryTitle"
+          placeholder="Give your memory a name"
+        >
+
+      </div>
+
+
+      <!-- Date -->
+      <div class="form-group">
+
+        <label for="memoryDate">
+          Date
+        </label>
+
+        <input
+          type="date"
+          id="memoryDate"
+        >
+
+      </div>
+
+
+      <!-- Story -->
+      <div class="form-group">
+
+        <label for="memoryStory">
+          Your Story
+        </label>
+
+        <textarea
+          id="memoryStory"
+          rows="6"
+          placeholder="Tell the story behind this memory..."
+        ></textarea>
+
+      </div>
+
+
+      <!-- Image -->
+      <div class="form-group">
+
+        <label for="memoryImage">
+          Photo
+        </label>
+
+        <input
+          type="file"
+          id="memoryImage"
+          accept="image/*"
+        >
+
+      </div>
+
+
+      <!-- Save -->
+      <button
+        type="button"
+        class="save-btn"
+        onclick="saveMemory()"
+      >
+        Save Memory 🤍
+      </button>
+
+    </section>
+
+
+    <!-- Memories -->
+    <section class="memories-board">
+
+      <h2>
+        My Memories 🌿
+      </h2>
+
+      <div id="memoryGrid">
+
+        <div class="empty">
+
+          <h3>
+            No memories yet 🤍
+          </h3>
+
+          <p>
+            Start by saving your first special memory.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- Footer -->
+  <footer>
+
+    <p>
+      LuckyLife 🌿 — Build the life you love.
+    </p>
+
+  </footer>
 
 </body>
 </html>

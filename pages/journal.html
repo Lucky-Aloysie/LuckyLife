@@ -3,99 +3,284 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LuckyLife | Journal</title>
+
+  <title>LuckyLife • Journal</title>
+
   <link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../css/journal.css">
+
+  <script src="../js/journal.js" defer></script>
 </head>
 
 <body>
 
   <!-- Navigation -->
   <nav class="navbar">
-    <div class="logo">LuckyLife 🌿</div>
+
+    <div class="logo">
+      LuckyLife 🌿
+    </div>
 
     <div class="nav-links">
-      <a href="../index.html">Home</a>
-      <a href="planner.html">Planner</a>
-      <a href="goals.html">Goals</a>
-      <a href="memories.html">Memories</a>
-      <a href="journal.html" class="active">Journal</a>
+
+      <a href="../index.html">
+        Home
+      </a>
+
+      <a href="planner.html">
+        Planner
+      </a>
+
+      <a href="goals.html">
+        Goals
+      </a>
+
+      <a href="memories.html">
+        Memories
+      </a>
+
+      <a href="journal.html" class="active">
+        Journal
+      </a>
+
     </div>
+
   </nav>
 
-  <!-- Header -->
-  <header class="page-header">
-    <p class="welcome">MY PERSONAL SPACE ✨</p>
-    <h1>Daily Journal 📖</h1>
-    <p>Reflect, pray, and capture the little moments that shape your life.</p>
-  </header>
 
-  <main>
+  <!-- Hero -->
+  <section class="hero">
 
-    <!-- Date -->
-    <section class="card">
-      <span class="label">TODAY</span>
-      <h2 id="journalDate"></h2>
-    </section>
+    <h1>
+      My Journal 📖
+    </h1>
 
-    <!-- Gratitude -->
-    <section class="card">
-      <span class="label">GRATITUDE</span>
-      <h2>3 Things I'm Thankful For</h2>
+    <p>
+      A quiet place for your thoughts, gratitude, prayers, and reflections.
+    </p>
 
-      <textarea id="gratitude1" placeholder="1."></textarea>
-      <textarea id="gratitude2" placeholder="2."></textarea>
-      <textarea id="gratitude3" placeholder="3."></textarea>
-    </section>
+    <div id="journalDate"></div>
 
-    <!-- Reflection -->
-    <section class="card">
-      <span class="label">REFLECTION</span>
-      <h2>How was your day?</h2>
+  </section>
 
-      <textarea id="reflection"
-        placeholder="Write your thoughts, feelings, victories, or lessons..."></textarea>
-    </section>
 
-    <!-- Prayer -->
-    <section class="card">
-      <span class="label">PRAYER</span>
-      <h2>Prayer & Conversation with God</h2>
+  <!-- Main -->
+  <main class="journal-container">
 
-      <textarea id="prayer"
-        placeholder="Dear Lord..."></textarea>
-    </section>
 
-    <!-- Mood -->
-    <section class="card">
-      <span class="label">TODAY'S MOOD</span>
+    <!-- Journal Form -->
+    <section class="journal-form-section">
 
-      <div class="mood-grid">
-        <button class="mood-btn" data-mood="😊">😊</button>
-        <button class="mood-btn" data-mood="😌">😌</button>
-        <button class="mood-btn" data-mood="❤️">❤️</button>
-        <button class="mood-btn" data-mood="🥹">🥹</button>
-        <button class="mood-btn" data-mood="😔">😔</button>
+      <div class="card">
+
+        <span class="label">
+          TODAY'S JOURNAL
+        </span>
+
+        <h2>
+          How are you feeling today? 🤍
+        </h2>
+
+
+        <!-- Mood -->
+        <div class="form-group">
+
+          <label>
+            Today's Mood
+          </label>
+
+          <div class="mood-buttons">
+
+            <button
+              type="button"
+              class="mood-btn"
+              data-mood="Happy 😊">
+              😊
+            </button>
+
+            <button
+              type="button"
+              class="mood-btn"
+              data-mood="Peaceful 😌">
+              😌
+            </button>
+
+            <button
+              type="button"
+              class="mood-btn"
+              data-mood="Excited 🤩">
+              🤩
+            </button>
+
+            <button
+              type="button"
+              class="mood-btn"
+              data-mood="Grateful 🥰">
+              🥰
+            </button>
+
+            <button
+              type="button"
+              class="mood-btn"
+              data-mood="Sad 😔">
+              😔
+            </button>
+
+            <button
+              type="button"
+              class="mood-btn"
+              data-mood="Stressed 😣">
+              😣
+            </button>
+
+            <button
+              type="button"
+              class="mood-btn"
+              data-mood="Tired 😴">
+              😴
+            </button>
+
+          </div>
+
+          <p id="selectedMood">
+            No mood selected
+          </p>
+
+        </div>
+
+
+        <!-- Gratitude -->
+        <div class="form-group">
+
+          <label for="gratitude1">
+            🙏 Something I'm grateful for
+          </label>
+
+          <input
+            type="text"
+            id="gratitude1"
+            placeholder="What are you grateful for today?"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="gratitude2">
+            🤍 Another thing I'm grateful for
+          </label>
+
+          <input
+            type="text"
+            id="gratitude2"
+            placeholder="Something else that made you grateful..."
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="gratitude3">
+            🌿 One more thing I'm grateful for
+          </label>
+
+          <input
+            type="text"
+            id="gratitude3"
+            placeholder="A person, moment, blessing, or opportunity..."
+          >
+
+        </div>
+
+
+        <!-- Reflection -->
+        <div class="form-group">
+
+          <label for="reflection">
+            💭 Today's Reflection
+          </label>
+
+          <textarea
+            id="reflection"
+            rows="7"
+            placeholder="What happened today? What did you learn? How are you feeling?"
+          ></textarea>
+
+        </div>
+
+
+        <!-- Prayer -->
+        <div class="form-group">
+
+          <label for="prayer">
+            🙏 Today's Prayer
+          </label>
+
+          <textarea
+            id="prayer"
+            rows="6"
+            placeholder="Write your prayer, hopes, or anything you want to give to God..."
+          ></textarea>
+
+        </div>
+
+
+        <!-- Save -->
+        <button
+          type="button"
+          id="saveJournal"
+          class="save-btn"
+        >
+          Save Journal Entry 🌿
+        </button>
+
+
+        <!-- Success Message -->
+        <p id="saveMessage"></p>
+
       </div>
 
-      <p id="selectedMood">No mood selected</p>
     </section>
 
-    <!-- Save -->
-    <section class="save-section">
-      <button id="saveJournal" class="main-btn">
-        Save Today's Journal 💾
-      </button>
 
-      <p id="saveMessage"></p>
+    <!-- Journal History -->
+    <section
+      id="journalHistory"
+      class="journal-history"
+    >
+
+      <div class="card journal-empty">
+
+        <span class="label">
+          MY JOURNAL
+        </span>
+
+        <h2>
+          Your journal is waiting for you 🤍
+        </h2>
+
+        <p>
+          Write your first entry above and it will appear here.
+        </p>
+
+      </div>
+
     </section>
+
 
   </main>
 
-  <footer>
-    <p>Every page you write becomes part of your story 🤍</p>
-  </footer>
 
-  <script src="../journal.js"></script>
+  <!-- Footer -->
+  <footer>
+
+    <p>
+      LuckyLife 🌿 — Build the life you love.
+    </p>
+
+  </footer>
 
 </body>
 </html>

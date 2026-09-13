@@ -3,138 +3,471 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LuckyLife</title>
+
+  <title>LuckyLife 🌿</title>
+
+  <!-- Shared CSS -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Home Page CSS -->
+  <link rel="stylesheet" href="css/home.css">
 </head>
 
 <body>
 
-  <!-- Navigation -->
+  <!-- ========================================
+       NAVIGATION
+  ======================================== -->
+
   <nav class="navbar">
-    <div class="logo">LuckyLife 🌿</div>
+
+    <div class="logo">
+      LuckyLife 🌿
+    </div>
 
     <div class="nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="pages/planner.html">Planner</a>
-      <a href="pages/goals.html">Goals</a>
-      <a href="pages/memories.html">Memories</a>
-      <a href="pages/journal.html">Journal</a>
+
+      <a href="index.html" class="active">
+        Home
+      </a>
+
+      <a href="pages/planner.html">
+        Planner
+      </a>
+
+      <a href="pages/goals.html">
+        Goals
+      </a>
+
+      <a href="pages/memories.html">
+        Memories
+      </a>
+
+      <a href="pages/journal.html">
+        Journal
+      </a>
+
     </div>
+
   </nav>
 
-  <!-- Hero -->
-  <header class="hero">
+
+  <!-- ========================================
+       HERO
+  ======================================== -->
+
+  <section class="hero">
 
     <div class="hero-content">
 
-      <p class="welcome">WELCOME BACK ✨</p>
+      <h1>
+        Welcome to LuckyLife 🌿
+      </h1>
 
-      <h1>Good Morning, Lucky 🤍</h1>
+      <p>
+        A beautiful space to organize your plans,
+        grow your goals, remember your moments,
+        and take care of the life you're building.
+      </p>
 
-      <p id="todayDate"></p>
+      <a href="pages/planner.html" class="hero-button">
+        Plan My Day ✨
+      </a>
 
     </div>
 
-  </header>
+  </section>
 
-  <!-- Main -->
+
+  <!-- ========================================
+       TODAY'S DASHBOARD
+  ======================================== -->
+
   <main>
 
-    <!-- Dashboard -->
-    <section class="dashboard-grid">
+    <section class="dashboard">
 
-      <div class="card progress-card">
+      <div class="container">
 
-        <span class="label">TODAY'S PROGRESS</span>
+        <div class="dashboard-heading">
 
-        <h2 id="progressNumber">0%</h2>
+          <span class="dashboard-label">
+            YOUR DAY
+          </span>
 
-        <p id="progressText">Start planning your day 🌿</p>
+          <h2>
+            Today's Dashboard
+          </h2>
 
-        <div class="progress-bar">
-          <div id="progressFill" class="progress-fill"></div>
+          <p id="todayDate">
+            Loading today's date...
+          </p>
+
+        </div>
+
+
+        <!-- Dashboard Cards -->
+
+        <div class="dashboard-grid">
+
+
+          <!-- ==================================
+               PROGRESS CARD
+          ================================== -->
+
+          <div class="progress-card">
+
+            <h3>
+              🌿 Today's Progress
+            </h3>
+
+            <div
+              class="progress-number"
+              id="progressNumber"
+            >
+              0%
+            </div>
+
+            <div
+              class="progress-subtitle"
+              id="progressText"
+            >
+              0 of 0 tasks completed
+            </div>
+
+            <div class="progress">
+
+              <div
+                class="progress-bar"
+                id="progressFill"
+              ></div>
+
+            </div>
+
+            <p
+              class="progress-message"
+              id="progressMessage"
+            >
+              Start your day with one small step ✨
+            </p>
+
+          </div>
+
+
+          <!-- ==================================
+               NEXT TASK CARD
+          ================================== -->
+
+          <div class="next-card">
+
+            <span class="next-task-label">
+              ✨ UP NEXT
+            </span>
+
+            <h3>
+              Your Next Task
+            </h3>
+
+            <div id="nextTask">
+              Nothing planned
+            </div>
+
+            <div id="nextTime">
+              Open your planner
+            </div>
+
+            <a
+              href="pages/planner.html"
+              class="next-task-link"
+            >
+              Open Planner →
+            </a>
+
+          </div>
+
+
+          <!-- ==================================
+               TODAY'S FOCUS
+          ================================== -->
+
+          <div class="focus-card">
+
+            <div class="focus-icon">
+              🎯
+            </div>
+
+            <h3>
+              Today's Focus
+            </h3>
+
+            <p>
+              Make today meaningful by focusing
+              on what truly matters to you.
+            </p>
+
+            <a href="pages/goals.html">
+              View My Goals →
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- ==================================
+             QUICK ACTIONS
+        ================================== -->
+
+        <div class="quick-actions">
+
+          <a
+            href="pages/planner.html"
+            class="quick-action"
+          >
+            <span>📅</span>
+            <div>
+              <strong>Planner</strong>
+              <small>Organize your day</small>
+            </div>
+          </a>
+
+
+          <a
+            href="pages/goals.html"
+            class="quick-action"
+          >
+            <span>🎯</span>
+            <div>
+              <strong>Goals</strong>
+              <small>Build your future</small>
+            </div>
+          </a>
+
+
+          <a
+            href="pages/memories.html"
+            class="quick-action"
+          >
+            <span>📸</span>
+            <div>
+              <strong>Memories</strong>
+              <small>Keep your moments</small>
+            </div>
+          </a>
+
+
+          <a
+            href="pages/journal.html"
+            class="quick-action"
+          >
+            <span>📖</span>
+            <div>
+              <strong>Journal</strong>
+              <small>Reflect on your day</small>
+            </div>
+          </a>
+
         </div>
 
       </div>
 
-      <div class="card next-card">
+    </section>
 
-        <span class="label">NEXT TASK</span>
 
-        <h3 id="nextTask">Nothing planned</h3>
+    <!-- ========================================
+         VERSE OF THE DAY
+    ======================================== -->
 
-        <p id="nextTime">Open your planner</p>
+    <section class="verse-section">
 
-        <a href="pages/planner.html" class="mini-btn">
-          Open Planner →
-        </a>
+      <div class="container">
+
+        <div class="verse">
+
+          <span class="verse-label">
+            ✨ A LITTLE REMINDER FOR TODAY
+          </span>
+
+          <h2>
+            📖 Verse of the Day
+          </h2>
+
+          <div class="verse-decoration">
+            🌿
+          </div>
+
+          <p>
+            “Commit to the Lord whatever you do,
+            and he will establish your plans.”
+          </p>
+
+          <small>
+            Proverbs 16:3
+          </small>
+
+        </div>
 
       </div>
 
     </section>
 
-    <!-- Verse -->
-    <section class="card verse-card">
 
-      <span class="label">VERSE OF THE DAY</span>
+    <!-- ========================================
+         MOTIVATION
+    ======================================== -->
 
-      <h3>Proverbs 17:17</h3>
-
-      <blockquote>
-        “A friend loves at all times.”
-      </blockquote>
-
-    </section>
-
-    <!-- Features -->
-    <section>
-
-      <div class="section-title">
-        <h2>My Life</h2>
-        <p>Everything important in one beautiful place.</p>
-      </div>
-
-      <div class="feature-grid">
-
-        <a href="pages/planner.html" class="feature-card">
-          <div class="icon">📅</div>
-          <h3>Daily Planner</h3>
-          <p>Plan every hour of your day.</p>
-        </a>
-
-        <a href="pages/goals.html" class="feature-card">
-          <div class="icon">🎯</div>
-          <h3>Goals</h3>
-          <p>Track dreams and achievements.</p>
-        </a>
-
-        <a href="pages/memories.html" class="feature-card">
-          <div class="icon">📸</div>
-          <h3>Memories</h3>
-          <p>Keep the moments you'll never forget.</p>
-        </a>
-
-        <a href="pages/journal.html" class="feature-card">
-          <div class="icon">📖</div>
-          <h3>Journal</h3>
-          <p>Reflect, pray and grow every day.</p>
-        </a>
-
-      </div>
-
-    </section>
-
-    <!-- Motivation -->
     <section class="motivation">
 
-      <div class="card">
+      <div class="container">
 
-        <span class="label">LUCKYLIFE MOTTO</span>
+        <span class="section-label">
+          🌱 KEEP GOING
+        </span>
 
         <h2>
-          Build the life you dream of,
-          one intentional day at a time.
+          Your life is being built one day at a time.
         </h2>
+
+        <p>
+          You don't have to have everything figured out.
+          Take one step, celebrate small progress,
+          and keep becoming the person you want to be.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         FEATURES
+    ======================================== -->
+
+    <section class="features">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="section-label">
+            🌿 YOUR SPACE
+          </span>
+
+          <h2>
+            Everything in One Place
+          </h2>
+
+          <p>
+            Use LuckyLife to organize the different
+            parts of your everyday life.
+          </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+
+          <a
+            href="pages/planner.html"
+            class="feature-card"
+          >
+
+            <div class="feature-icon">
+              📅
+            </div>
+
+            <h3>
+              Daily Planner
+            </h3>
+
+            <p>
+              Plan your tasks, schedule your time,
+              and stay organized.
+            </p>
+
+            <span>
+              Open Planner →
+            </span>
+
+          </a>
+
+
+          <a
+            href="pages/goals.html"
+            class="feature-card"
+          >
+
+            <div class="feature-icon">
+              🎯
+            </div>
+
+            <h3>
+              Smart Goals
+            </h3>
+
+            <p>
+              Set meaningful goals and track
+              your progress step by step.
+            </p>
+
+            <span>
+              View Goals →
+            </span>
+
+          </a>
+
+
+          <a
+            href="pages/memories.html"
+            class="feature-card"
+          >
+
+            <div class="feature-icon">
+              📸
+            </div>
+
+            <h3>
+              Memories
+            </h3>
+
+            <p>
+              Save your favorite moments,
+              stories, and beautiful memories.
+            </p>
+
+            <span>
+              View Memories →
+            </span>
+
+          </a>
+
+
+          <a
+            href="pages/journal.html"
+            class="feature-card"
+          >
+
+            <div class="feature-icon">
+              📖
+            </div>
+
+            <h3>
+              My Journal
+            </h3>
+
+            <p>
+              Reflect, express gratitude,
+              and write about your journey.
+            </p>
+
+            <span>
+              Open Journal →
+            </span>
+
+          </a>
+
+        </div>
 
       </div>
 
@@ -142,14 +475,25 @@
 
   </main>
 
-  <!-- Footer -->
+
+  <!-- ========================================
+       FOOTER
+  ======================================== -->
+
   <footer>
 
-    <p>Made with 🤍 by Lucky</p>
+    <p>
+      LuckyLife 🌿 — Your life. Your journey. Your story.
+    </p>
 
   </footer>
 
-  <script src="script.js"></script>
+
+  <!-- ========================================
+       HOME JAVASCRIPT
+  ======================================== -->
+
+  <script src="js/script.js"></script>
 
 </body>
 </html>

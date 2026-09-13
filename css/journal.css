@@ -1,0 +1,362 @@
+/* ========================================
+   LuckyLife 🌿
+   JOURNAL PAGE
+======================================== */
+
+.journal-container {
+  max-width: 1000px;
+  margin: 0 auto;
+
+  animation: pageEnter 0.7s ease both;
+}
+
+/* ========================================
+   JOURNAL FORM
+======================================== */
+
+.journal-form-section {
+  background: var(--white);
+
+  padding: 30px;
+
+  border: 1px solid var(--border);
+  border-radius: 22px;
+
+  box-shadow: var(--shadow);
+
+  margin-bottom: 45px;
+
+  animation: formEnter 0.8s ease both;
+}
+
+.journal-form-section h1,
+.journal-form-section h2 {
+  color: var(--green-dark);
+  margin-bottom: 8px;
+}
+
+.journal-form-section > p {
+  color: var(--brown-light);
+  margin-bottom: 25px;
+}
+
+/* ========================================
+   JOURNAL DATE
+======================================== */
+
+#journalDate {
+  display: inline-block;
+
+  padding: 8px 13px;
+
+  background: var(--green-light);
+
+  color: var(--green);
+
+  border-radius: 20px;
+
+  font-size: 0.9rem;
+  font-weight: bold;
+
+  margin-bottom: 25px;
+}
+
+/* ========================================
+   FORM GROUP
+======================================== */
+
+.journal-form-section label,
+.journal-form-section .label {
+  display: block;
+
+  color: var(--brown);
+
+  font-weight: bold;
+
+  margin-bottom: 8px;
+}
+
+.journal-field {
+  margin-bottom: 22px;
+}
+
+/* ========================================
+   MOOD
+======================================== */
+
+.mood-buttons {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-bottom: 10px;
+}
+
+.mood-btn {
+  min-width: 48px;
+  min-height: 48px;
+
+  padding: 8px;
+
+  background: var(--cream);
+
+  color: var(--chocolate);
+
+  border: 1px solid var(--border);
+
+  border-radius: 14px;
+
+  font-size: 1.4rem;
+
+  box-shadow: none;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.mood-btn:hover {
+  background: var(--green-light);
+
+  border-color: var(--green);
+
+  transform: translateY(-3px);
+
+  box-shadow: none;
+}
+
+.mood-btn.selected {
+  background: var(--green-light);
+
+  border: 2px solid var(--green);
+
+  transform: scale(1.08);
+
+  animation: moodPop 0.3s ease both;
+}
+
+#selectedMood {
+  color: var(--green);
+
+  font-size: 0.9rem;
+
+  font-weight: bold;
+
+  margin-top: 8px;
+}
+
+/* ========================================
+   SAVE MESSAGE
+======================================== */
+
+#saveMessage {
+  margin-top: 15px;
+
+  color: var(--green);
+
+  font-weight: bold;
+
+  animation: messageAppear 0.4s ease both;
+}
+
+/* ========================================
+   JOURNAL HISTORY
+======================================== */
+
+.journal-history {
+  margin-top: 40px;
+}
+
+.journal-history h2 {
+  color: var(--green-dark);
+
+  margin-bottom: 20px;
+}
+
+/* ========================================
+   JOURNAL ENTRY
+======================================== */
+
+.journal-entry {
+  background: var(--white);
+
+  border: 1px solid var(--border);
+
+  border-radius: 20px;
+
+  padding: 25px;
+
+  margin-bottom: 20px;
+
+  box-shadow: var(--shadow);
+
+  animation: journalReveal 0.6s ease both;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.journal-entry:hover {
+  transform: translateY(-4px);
+
+  box-shadow: var(--shadow-hover);
+}
+
+.journal-entry-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.journal-entry-date {
+  color: var(--green);
+
+  font-weight: bold;
+
+  font-size: 0.9rem;
+}
+
+.entry-mood {
+  font-size: 1.5rem;
+}
+
+/* ========================================
+   ENTRY SECTIONS
+======================================== */
+
+.journal-entry-section {
+  margin-bottom: 18px;
+
+  padding: 15px;
+
+  background: var(--green-light);
+
+  border-radius: 14px;
+}
+
+.journal-entry-section strong {
+  display: block;
+
+  color: var(--green-dark);
+
+  margin-bottom: 6px;
+}
+
+.journal-entry-section p {
+  color: var(--brown-light);
+
+  white-space: pre-wrap;
+}
+
+.prayer-entry {
+  background: #f3eee7;
+
+  border-left: 4px solid var(--brown);
+}
+
+/* ========================================
+   DELETE BUTTON
+======================================== */
+
+.journal-entry .delete-btn {
+  background: #8B4A42;
+
+  margin-top: 5px;
+}
+
+.journal-entry .delete-btn:hover {
+  background: #713830;
+}
+
+/* ========================================
+   EMPTY JOURNAL
+======================================== */
+
+.journal-empty {
+  padding: 45px 20px;
+
+  text-align: center;
+
+  background: var(--white);
+
+  border: 1px dashed var(--border);
+
+  border-radius: 18px;
+
+  color: var(--brown-light);
+}
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+
+@keyframes journalReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes moodPop {
+  0% {
+    transform: scale(0.85);
+  }
+
+  70% {
+    transform: scale(1.12);
+  }
+
+  100% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes messageAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 600px) {
+  .journal-form-section {
+    padding: 20px;
+  }
+
+  .journal-entry {
+    padding: 20px;
+  }
+
+  .journal-entry-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .mood-buttons {
+    gap: 8px;
+  }
+}

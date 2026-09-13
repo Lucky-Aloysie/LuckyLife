@@ -1,0 +1,782 @@
+/* ========================================
+   LuckyLife 🌿
+   GOALS PAGE
+======================================== */
+
+
+/* ========================================
+   GOALS CONTAINER
+======================================== */
+
+.goals-container {
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  animation: pageEnter 0.7s ease both;
+}
+
+
+/* ========================================
+   PAGE INTRO
+======================================== */
+
+.goals-container > h1 {
+  color: var(--green-dark);
+
+  font-size: 2.4rem;
+
+  margin-bottom: 8px;
+}
+
+
+.goals-container > p {
+  color: var(--brown-light);
+
+  margin-bottom: 35px;
+
+  line-height: 1.7;
+}
+
+
+/* ========================================
+   GOAL FORM
+======================================== */
+
+.goal-form-section {
+  position: relative;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--white),
+      #f3f0e8
+    );
+
+  padding: 35px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 26px;
+
+  box-shadow: var(--shadow);
+
+  margin-bottom: 45px;
+
+  overflow: hidden;
+
+  animation: formEnter 0.8s ease both;
+}
+
+
+.goal-form-section::before {
+  content: "🎯";
+
+  position: absolute;
+
+  right: 30px;
+  top: 25px;
+
+  font-size: 4rem;
+
+  opacity: 0.08;
+}
+
+
+.goal-form-section h1,
+.goal-form-section h2 {
+  position: relative;
+
+  color: var(--green-dark);
+
+  margin-bottom: 10px;
+}
+
+
+.goal-form-section > p {
+  position: relative;
+
+  max-width: 700px;
+
+  color: var(--brown-light);
+
+  margin-bottom: 28px;
+
+  line-height: 1.7;
+}
+
+
+/* ========================================
+   FORM
+======================================== */
+
+.goal-form {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 20px;
+
+  position: relative;
+}
+
+
+.goal-form .full-width {
+  grid-column: 1 / -1;
+}
+
+
+.goal-form label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: var(--brown);
+
+  font-size: 0.9rem;
+
+  font-weight: 700;
+}
+
+
+/* Inputs */
+
+.goal-form input,
+.goal-form select,
+.goal-form textarea {
+  width: 100%;
+
+  padding: 13px 15px;
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+
+  border-radius: 13px;
+
+  color: var(--brown);
+
+  font-family: inherit;
+
+  font-size: 0.95rem;
+
+  outline: none;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+.goal-form input:focus,
+.goal-form select:focus,
+.goal-form textarea:focus {
+  border-color: var(--green);
+
+  box-shadow:
+    0 0 0 4px rgba(45, 106, 79, 0.08);
+}
+
+
+.goal-form textarea {
+  min-height: 100px;
+
+  resize: vertical;
+}
+
+
+/* Add Goal button */
+
+.goal-form button {
+  grid-column: 1 / -1;
+
+  margin-top: 5px;
+
+  padding: 14px 25px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: var(--green);
+
+  color: white;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 22px rgba(45, 106, 79, 0.15);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.goal-form button:hover {
+  background: var(--green-dark);
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 15px 30px rgba(45, 106, 79, 0.22);
+}
+
+
+/* ========================================
+   PROGRESS SLIDER
+======================================== */
+
+.progress-wrapper {
+  grid-column: 1 / -1;
+
+  padding: 20px;
+
+  background: var(--green-light);
+
+  border-radius: 16px;
+
+  border: 1px solid rgba(45, 106, 79, 0.08);
+}
+
+
+.progress-wrapper label {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+
+#goalProgress {
+  width: 100%;
+
+  padding: 0;
+
+  margin-top: 12px;
+
+  border: none;
+
+  box-shadow: none;
+
+  accent-color: var(--green);
+
+  cursor: pointer;
+}
+
+
+#progressValue {
+  color: var(--green);
+
+  font-weight: 800;
+}
+
+
+/* ========================================
+   GOALS BOARD
+======================================== */
+
+.goals-board {
+  margin-top: 40px;
+}
+
+
+.goals-board h2 {
+  color: var(--green-dark);
+
+  margin-bottom: 7px;
+
+  font-size: 1.8rem;
+}
+
+
+.goals-board > p {
+  color: var(--brown-light);
+
+  margin-bottom: 25px;
+}
+
+
+#goalGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 24px;
+}
+
+
+/* ========================================
+   GOAL CARD
+======================================== */
+
+.goal-card {
+  position: relative;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--white),
+      #f7f3eb
+    );
+
+  padding: 28px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 23px;
+
+  box-shadow: var(--shadow);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+
+  animation: cardReveal 0.6s ease both;
+}
+
+
+.goal-card::after {
+  content: "🌱";
+
+  position: absolute;
+
+  right: 20px;
+  top: 15px;
+
+  font-size: 2.5rem;
+
+  opacity: 0.08;
+
+  pointer-events: none;
+}
+
+
+.goal-card:hover {
+  transform: translateY(-7px);
+
+  box-shadow: var(--shadow-hover);
+
+  border-color:
+    rgba(45, 106, 79, 0.22);
+}
+
+
+.goal-card h3 {
+  position: relative;
+
+  z-index: 1;
+
+  color: var(--green-dark);
+
+  margin-bottom: 10px;
+
+  font-size: 1.25rem;
+
+  line-height: 1.4;
+}
+
+
+/* ========================================
+   GOAL CATEGORY
+======================================== */
+
+.goal-category {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 6px 12px;
+
+  margin-bottom: 17px;
+
+  border-radius: 30px;
+
+  background: var(--green-light);
+
+  color: var(--green);
+
+  font-size: 0.75rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.3px;
+}
+
+
+.goal-card p {
+  color: var(--brown-light);
+
+  margin-bottom: 9px;
+
+  line-height: 1.6;
+
+  font-size: 0.92rem;
+}
+
+
+/* ========================================
+   GOAL PROGRESS
+======================================== */
+
+.goal-progress {
+  margin-top: 22px;
+
+  padding: 17px;
+
+  background: #f1ede4;
+
+  border-radius: 15px;
+}
+
+
+.goal-progress-bar {
+  width: 100%;
+
+  height: 10px;
+
+  background: var(--beige);
+
+  border-radius: 30px;
+
+  overflow: hidden;
+}
+
+
+.goal-fill {
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--green),
+      #6b9b7d
+    );
+
+  border-radius: 30px;
+
+  transition: width 0.7s ease;
+}
+
+
+.goal-progress-text {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 9px;
+
+  color: var(--brown-light);
+
+  font-size: 0.8rem;
+
+  font-weight: 600;
+}
+
+
+/* ========================================
+   SMART DETAILS
+======================================== */
+
+.smart-details {
+  margin-top: 22px;
+
+  display: grid;
+
+  gap: 10px;
+}
+
+
+.smart-detail {
+  padding: 13px 15px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--green-light),
+      #f0f5f0
+    );
+
+  border-radius: 13px;
+
+  border-left: 3px solid var(--green);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+
+.smart-detail:hover {
+  transform: translateX(5px);
+
+  background: #e5efe7;
+}
+
+
+.smart-detail strong {
+  display: block;
+
+  color: var(--green-dark);
+
+  font-size: 0.8rem;
+
+  margin-bottom: 4px;
+}
+
+
+.smart-detail span {
+  color: var(--brown-light);
+
+  font-size: 0.87rem;
+
+  line-height: 1.5;
+}
+
+
+/* ========================================
+   GOAL ACTIONS
+======================================== */
+
+.goal-actions {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 22px;
+}
+
+
+.goal-actions button {
+  flex: 1;
+
+  padding: 11px 14px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  color: white;
+
+  font-family: inherit;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+
+.goal-actions button:hover {
+  transform: translateY(-2px);
+
+  opacity: 0.92;
+}
+
+
+.progress-btn {
+  background: var(--brown);
+}
+
+
+.progress-btn:hover {
+  background: var(--chocolate);
+}
+
+
+.delete-btn {
+  background: #8B4A42;
+}
+
+
+.delete-btn:hover {
+  background: #713830;
+}
+
+
+/* ========================================
+   EMPTY GOALS
+======================================== */
+
+.empty {
+  grid-column: 1 / -1;
+
+  padding: 60px 25px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--white),
+      #f7f3eb
+    );
+
+  border: 1px dashed var(--border);
+
+  border-radius: 22px;
+
+  color: var(--brown-light);
+
+  box-shadow:
+    0 8px 25px rgba(74, 56, 45, 0.04);
+}
+
+
+.empty::before {
+  content: "🎯";
+
+  display: block;
+
+  margin-bottom: 12px;
+
+  font-size: 2.5rem;
+
+  opacity: 0.7;
+}
+
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+
+@keyframes pageEnter {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+@keyframes formEnter {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+@keyframes cardReveal {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+
+  #goalGrid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 750px) {
+
+  .goal-form {
+    grid-template-columns: 1fr;
+  }
+
+
+  .goal-form .full-width,
+  .goal-form button,
+  .progress-wrapper {
+    grid-column: auto;
+  }
+
+
+  .goal-form-section {
+    padding: 27px;
+  }
+
+
+  .goals-container > h1 {
+    font-size: 2rem;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .goal-form-section {
+    padding: 21px;
+
+    border-radius: 20px;
+  }
+
+
+  .goal-card {
+    padding: 23px;
+
+    border-radius: 20px;
+  }
+
+
+  .goal-actions {
+    flex-direction: column;
+  }
+
+
+  .goal-actions button {
+    width: 100%;
+  }
+
+
+  .progress-number {
+    font-size: 2.7rem;
+  }
+
+}

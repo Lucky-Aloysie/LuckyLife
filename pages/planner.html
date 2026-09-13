@@ -4,57 +4,78 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LuckyLife • Planner</title>
-  <link rel="stylesheet" href="../style.css" />
+
+  <link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../css/planner.css">
 </head>
 <body>
 
+  <!-- Navigation -->
   <nav class="navbar">
     <div class="logo">LuckyLife 🌿</div>
 
     <div class="nav-links">
       <a href="../index.html">Home</a>
-      <a href="planner.html">Planner</a>
-      <a href="#">Goals</a>
-      <a href="#">Memories</a>
-      <a href="#">Journal</a>
+      <a href="planner.html" class="active">Planner</a>
+      <a href="goals.html">Goals</a>
+      <a href="memories.html">Memories</a>
+      <a href="journal.html">Journal</a>
     </div>
   </nav>
 
+  <!-- Header -->
   <header>
     <h1>Daily Planner</h1>
-    <p>Create a beautiful schedule for your day</p>
+    <p>Create a beautiful schedule for your day ✨</p>
   </header>
 
   <main>
 
-    <div class="card date-box">
-      <h3>📅 Today's Date</h3>
+    <!-- Date -->
+    <section class="card">
+      <h3>📅 Choose Date</h3>
       <input type="date" id="planner-date">
-    </div>
+    </section>
 
-    <div class="card">
-      <h3>✨ Add a New Task</h3>
+    <!-- Add Task -->
+    <section class="card">
+      <h3>➕ Add New Plan</h3>
 
       <div class="task-form">
-        <input type="time" id="task-time">
-        <input type="text" id="task-name" placeholder="Morning prayer, work, gym...">
-        <button onclick="addTask()">Add</button>
-      </div>
-    </div>
+        <input
+          type="time"
+          id="task-time"
+          placeholder="Time"
+        >
 
-    <div class="card">
+        <input
+          type="text"
+          id="task-name"
+          placeholder="Morning prayer, work, gym..."
+        >
+
+        <button id="add-task-btn">
+          Add Plan
+        </button>
+      </div>
+    </section>
+
+    <!-- Schedule -->
+    <section class="card">
       <h3>🌿 Today's Schedule</h3>
-      <div id="task-list"></div>
-    </div>
+
+      <div id="task-list" class="task-list"></div>
+    </section>
 
   </main>
 
-  <script src="../script.js"></script>
+  <!-- Planner JavaScript -->
+  <script src="../js/planner.js"></script>
 
   <script>
-    const dateInput = document.getElementById("planner-date");
-    const today = new Date().toISOString().split("T")[0];
-    dateInput.value = today;
+    document
+      .getElementById("add-task-btn")
+      .addEventListener("click", addTask);
   </script>
 
 </body>

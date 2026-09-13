@@ -3,9 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>LuckyLife • Goals</title>
-  <link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../css/goals.css">
+
+  <script src="../js/goals.js" defer></script>
 </head>
+
 <body>
 
   <!-- Navigation -->
@@ -21,85 +26,217 @@
     </div>
   </nav>
 
+
   <!-- Hero -->
-  <header class="hero">
+  <section class="hero">
     <h1>My Goals 🎯</h1>
-    <p>Every dream begins with one intentional step.</p>
-  </header>
+    <p>Turn your dreams into SMART goals and make them happen.</p>
+  </section>
 
-  <!-- Main -->
-  <main>
 
-    <section class="card">
+  <!-- SMART Goal Form -->
+  <main class="goals-container">
 
-      <span class="label">NEW GOAL</span>
+    <section class="goal-form-section">
 
-      <h2 style="margin:10px 0 20px;color:#174A32;">
-        Create a New Goal
-      </h2>
+      <h2>Create a SMART Goal 🌿</h2>
 
-      <label>Goal Title</label>
-      <input
-        type="text"
-        id="goalTitle"
-        placeholder="Example: Save $10,000"
-      >
-
-      <label>Category</label>
-      <select id="goalCategory">
-        <option>Financial</option>
-        <option>Career</option>
-        <option>Health</option>
-        <option>Spiritual</option>
-        <option>Personal</option>
-      </select>
-
-      <label>Progress (%)</label>
-      <input
-        type="range"
-        id="goalProgress"
-        min="0"
-        max="100"
-        value="0"
-      >
-
-      <p id="progressValue" style="margin:10px 0;color:#174A32;font-weight:bold;">
-        0% completed
+      <p class="section-intro">
+        Make your goal Specific, Measurable, Achievable, Relevant, and Time-Bound.
       </p>
 
-      <button onclick="addGoal()">
-        Save Goal 🎯
+
+      <!-- Category -->
+      <div class="form-group">
+
+        <label for="goalCategory">
+          Category
+        </label>
+
+        <select id="goalCategory">
+
+          <option value="Personal">
+            Personal
+          </option>
+
+          <option value="Career">
+            Career
+          </option>
+
+          <option value="Education">
+            Education
+          </option>
+
+          <option value="Financial">
+            Financial
+          </option>
+
+          <option value="Health">
+            Health
+          </option>
+
+          <option value="Family">
+            Family
+          </option>
+
+          <option value="Spiritual">
+            Spiritual
+          </option>
+
+          <option value="Relationships">
+            Relationships
+          </option>
+
+          <option value="Other">
+            Other
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- Specific -->
+      <div class="form-group">
+
+        <label for="goalTitle">
+          🎯 S — Specific
+        </label>
+
+        <input
+          type="text"
+          id="goalTitle"
+          placeholder="What exactly do you want to achieve?"
+        >
+
+      </div>
+
+
+      <!-- Measurable -->
+      <div class="form-group">
+
+        <label for="goalMeasure">
+          📊 M — Measurable
+        </label>
+
+        <textarea
+          id="goalMeasure"
+          rows="3"
+          placeholder="How will you measure your progress?"
+        ></textarea>
+
+      </div>
+
+
+      <!-- Achievable -->
+      <div class="form-group">
+
+        <label for="goalActions">
+          💪 A — Achievable
+        </label>
+
+        <textarea
+          id="goalActions"
+          rows="3"
+          placeholder="What actions will you take to achieve this goal?"
+        ></textarea>
+
+      </div>
+
+
+      <!-- Relevant -->
+      <div class="form-group">
+
+        <label for="goalWhy">
+          ❤️ R — Relevant
+        </label>
+
+        <textarea
+          id="goalWhy"
+          rows="3"
+          placeholder="Why is this goal important to you?"
+        ></textarea>
+
+      </div>
+
+
+      <!-- Time Bound -->
+      <div class="form-group">
+
+        <label for="goalDeadline">
+          📅 T — Time-Bound
+        </label>
+
+        <input
+          type="date"
+          id="goalDeadline"
+        >
+
+      </div>
+
+
+      <!-- Progress -->
+      <div class="form-group">
+
+        <label for="goalProgress">
+          📈 Current Progress
+        </label>
+
+        <input
+          type="range"
+          id="goalProgress"
+          min="0"
+          max="100"
+          value="0"
+        >
+
+        <div id="progressValue">
+          0% completed
+        </div>
+
+      </div>
+
+
+      <!-- Save -->
+      <button
+        type="button"
+        class="save-btn"
+        onclick="addGoal()"
+      >
+        Save SMART Goal 🎯
       </button>
 
     </section>
 
-    <section style="margin-top:40px;">
 
-      <div class="section-title">
-        <h2>My Dream Board</h2>
-        <p>Keep building the future you're praying for.</p>
+    <!-- Goals Board -->
+    <section class="goals-board">
+
+      <h2>My Goals 🌱</h2>
+
+      <div id="goalGrid">
+
+        <div class="empty">
+
+          <h3>No goals yet 🌿</h3>
+
+          <p>
+            Start by creating your first SMART goal.
+          </p>
+
+        </div>
+
       </div>
-
-      <div id="goalGrid" class="goal-grid"></div>
 
     </section>
 
   </main>
 
+
+  <!-- Footer -->
   <footer>
-    <p>Made with 🤍 by Lucky</p>
+    <p>LuckyLife 🌿 — Build the life you love.</p>
   </footer>
-
-  <script src="../script.js"></script>
-
-  <script>
-    const slider = document.getElementById("goalProgress");
-    const value = document.getElementById("progressValue");
-
-    slider.addEventListener("input", () => {
-      value.textContent = slider.value + "% completed";
-    });
-  </script>
 
 </body>
 </html>
